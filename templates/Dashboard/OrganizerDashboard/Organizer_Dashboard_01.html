@@ -1,0 +1,635 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organizer Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        }
+    </script>
+    <style>
+        /* Tooltip styling */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 300px;  
+            height: 100px;  
+            background-color: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 10;
+            top: 170%;  /* Position above the button */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: visibility 0s, opacity 0.2s ease-in-out;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh; 
+            width: 100vw;
+            overflow: hidden;
+            z-index: -1; /* Send to background */
+        }
+
+        .background-animation img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire area */
+            animation: slide 20s infinite; /* Animate over every 20 seconds */
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        @keyframes slide {
+            0% { opacity: 1; }
+            25% { opacity: 1; }
+            33% { opacity: 0; }
+            58% { opacity: 0; }
+            66% { opacity: 1; }
+            91% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .background-animation img:nth-child(1) { animation-delay: 0s; }
+        .background-animation img:nth-child(2) { animation-delay: 5s; }
+        .background-animation img:nth-child(3) { animation-delay: 10s; }
+        .background-animation img:nth-child(4) { animation-delay: 15s; }
+
+        .slider-container {
+            width: 1080px;
+            height: 720px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .slider {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+    </style>
+
+<style>
+    .typing-effect {
+      border-right: 2px solid; /* Optional: Add a blinking cursor */
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3.5s steps(40, end) infinite, /* Typing animation */
+                 blink-caret .75s step-end infinite; /* Cursor animation */
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color:red; } /* Cursor color */
+    }
+    .font-caveat {
+        font-family: 'Caveat', cursive;
+    }
+    .font-permanent {
+        font-family: 'Permanent Marker', cursive;
+    }
+    .font-monoton {
+        font-family: 'Monoton', cursive;
+    }
+    .bebas-neue-regular {
+        font-family: "Bebas Neue", serif;
+      }
+      
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat&display=swap" rel="stylesheet">
+
+
+  </head>
+  <body class="bg-teal-100">
+    
+      {% comment %} <div class="m-3 md:m-3 p-3 md:p-3 hover:bg-emerald-500 rounded-lg ">
+          <h1 class="text-xl text-center justify-center flex-auto tooltip">
+              <b>Admin Dashboard</b>
+              <span class="tooltip-text"> 
+                  <b>Note:</b>  This Dashboard is for Event Organizer.
+              </span>
+          </h1>
+      </div> {% endcomment %}
+      <div class="m-3 md:m-3 p-3 md:p-3">
+          <h1 class="text-2xl text-center justify-center flex-auto">
+              <div class="justify-around">
+                <img src="https://img.icons8.com/?size=100&id=Rx4hv0WT0XYq&format=png&color=000000" alt="Icon" class="h-9 w-9" style="display: inline-block; vertical-align: middle;">
+                <b>Lumevent</b> <br>
+                {% comment %} <span class=" text-xl text-teal-600 drop-shadow-lg italic hover:text-teal-700 hover:font-extrabold"> <b>Bringing Moments to Light...</b></span> {% endcomment %}
+                {% comment %} <span class="text-xl text-teal-600 drop-shadow-lg italic font-bold 
+                hover:text-teal-700 hover:font-extrabold animate-fade">Bringing Moments to Light...</span> {% endcomment %}
+   
+
+                <span class="text-2xl text-teal-600 drop-shadow-lg font-caveat hover:text-teal-600 hover:font-bold typing-effect"></span>
+                
+            </div>
+        </h1>
+    </div>
+    <nav class="bg-teal-50 shadow-lg fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="https://img.icons8.com/?size=100&id=SsrYhZUsKhjk&format=png&color=000000" alt="Icon" class="h-9 w-9" style="display: inline-block; vertical-align: middle;">
+                    <a href="/" class="text-2xl font-monoton text-teal-900 pl-1 drop-shadow-lg"> Lumevent</a>
+                </div>
+                
+                <!-- Menu Items (Desktop) -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#" class="text-gray-700 p-2 hover:text-teal-700 hover:font-bold hover:bg-teal-200 hover:rounded-2xl ">Home</a>
+                    <a href="#" class="text-gray-700 p-2  hover:text-teal-700 hover:font-bold hover:bg-teal-200 hover:rounded-2xl">Events</a>
+                    <a href="#" class="text-gray-700 p-2 hover:text-teal-700 hover:font-bold hover:bg-teal-200 hover:rounded-2xl">About</a>
+                    <a href="#" class="text-gray-700 p-2 hover:text-teal-700 hover:font-bold hover:bg-teal-200 hover:rounded-2xl">Contact</a>
+                    {% comment %} <a href="{% url 'form1' %}" class="font-semibold bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 hover:rounded-lg hover:text-gray-200"> Get Started</a>       {% endcomment %}
+                    <a href="" class="font-semibold bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 hover:rounded-lg hover:text-gray-200"> Get Started</a>      
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">==
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Events</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+            {% comment %} <a href="{% url 'form1' %}" class="block px-4 py-2 bg-indigo-600 text-white text-center rounded-lg hover:bg-indigo-700">Get Started</a> {% endcomment %}
+            <a href="" class="block px-4 py-2 bg-indigo-600 text-white text-center rounded-lg hover:bg-indigo-700">Get Started</a>
+        </div>
+    </nav>
+    <!-- Animated Background -->
+    <div class="background-animation mt-28">
+        <img src="{% static 'image/mm.jpg' %}" alt="Background Image 1">
+        <img src="{% static 'image/m1.jpg' %}" alt="Background Image 2">
+        <img src="{% static 'image/premium_photo-1663011016084-c0413b8fecc2.avif' %}" alt="Background Image 3">
+        <img src="{% static 'image/premium_photo-1723773614061-03914c8d1334.avif' %}" alt="Background Image 4">
+    </div>
+<div class="mt-96 pt-96">
+    <nav class="bg-emerald-600 p-4 text-white rounded-3xl m-4">
+      <div class="container mx-auto flex justify-between">
+        <a href="/" class=" text-pretty font-semibold">Event Management</a>
+        <div>
+            <div>
+                {% comment %} <a href="{% url 'dashboard' %}" class="px-4">Dashboard</a>
+                <a href="{% url 'event_list' %}" class="px-4">Events</a>
+                <a href="{% url 'participant_list' %}" class="px-4">Participants</a>
+                <a href="{% url 'create_event' %}" class="px-4">Create Event</a>
+                <a href="{% url 'contact' %}" class="px-4">Contact</a> {% endcomment %}
+              </div>
+        </div>
+      </div>
+    </nav>
+</div>
+
+
+<div class="bg-red-400">
+    <img src="{% static 'image/Monochrome Minimalist Live Music Event Facebook Post.png' %}" alt="Background Image 1"> 
+    <div class="bg-red-700 rounded-2xl flex">
+        <div class="">
+            <img class="" src="{% static 'image/kames__female_majestic_doberman_with_slik_face_on_clean_red_bac_74d34437-3639-4b85-bee1-4fcce1af2acf.png' %}" alt="Background Image 1">
+        </div>
+        <div>
+            <h1 class="text-xl font-monoton flex items-center justify-center pt-10 pb-3"><b>Dog &nbsp&nbsp showing</b></h1>
+            <p class="font-permanent pl-4 pr-2 flex items-center justify-center">The most popular form of canine competition in this country is <br> the dog show - the contest for purebred <br>dogs registered with The Kennel Club, such as those seen at Crufts. Conformation events <br>evaluate dogs by how closely they resemble their breed’s standard. <br> Here’s everything you need to know about attending or participating in a show.</p>
+        </div>
+    </div>
+    <div class="flex">
+        <img src="{% static 'image/Screenshot 2025-02-15 224756.png' %}" alt="Background Image 1"> 
+        <p class="text-8xl bebas-neue-regular pl-72 pt-20 typing-effect">Have YOU ever been there...</p>
+    </div>
+   </div>
+<div class="flex">
+    {% comment %} <div class="bg-green-800 p-8 text-white"> {% endcomment %}
+    <div class="p-8 text-white pt-45 items-center justify-center pl-10">
+        <h1 class="text-6xl font-extrabold italic text-lime-400">
+            best friend
+        </h1>
+        <h2 class="text-3xl font-bold italic rotate-[-5deg] text-green-700">
+            The Event for you and your
+        </h2>
+        <p class="mt-15 text-lg text-green-700">
+            The Young Kennel event in New York City offers young people an opportunity 
+            to meet like-minded people and bond with their dog.
+        </p>
+    </div>
+    <div class="items-center justify-items-end">
+        <img class="" src="{% static 'image/banner-image.jpg' %}" alt="Background Image 1"> 
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="default-carousel" class="relative w-full" data-carousel="slide">
+    <!-- Carousel wrapper -->
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+         <!-- Item 1 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-1" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+        <!-- Item 3 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-3.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+        <!-- Item 4 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-4.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+        <!-- Item 5 -->
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="/docs/images/carousel/carousel-5.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+    </div>
+    <!-- Slider indicators -->
+    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+    </div>
+    <!-- Slider controls -->
+    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span class="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span class="sr-only">Next</span>
+        </span>
+    </button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <main class="container mx-auto">
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Events Category</h2>
+                </nav>
+            </div>
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Total Events List</h2>
+                </nav>
+            </div>
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Upcoming Events</h2>
+                </nav>
+            </div>
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Running Events</h2>
+                </nav>
+            </div>
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Create Event</h2>
+                </nav>
+            </div>
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Unpaid/Pending payment</h2>
+                </nav>
+            </div>
+            <div class="bg-slate-200 p-4 rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer">
+                <nav class="bg-emerald-600 p-4 text-white rounded-3xl">
+                    <h2>Total Paid Events</h2>
+                </nav>
+            </div>
+        </div>
+        <!-- Navigation Links -->
+         <nav class="pl-11">
+             <div class="hidden md:flex space-x-8">
+                 <a href="#" class="hover:text-emerald-500">Resources</a>
+                 <a href="#" class="hover:text-emerald-500">Support</a>
+                 
+                 <!-- Dropdown: Industries -->
+                 <div class="relative group">
+                     <button class="hover:text-emerald-500">Industries</button>
+                     <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-48">
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Corporate Events</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Weddings</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Concerts</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Conferences</a>
+                     </div>
+                 </div>
+     
+                 <!-- Dropdown: Solutions -->
+                 <div class="relative group">
+                     <button class="hover:text-emerald-500">Solutions</button>
+                     <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-56">
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Ticketing & Registration</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Marketing & Promotion</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Attendee Engagement</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Analytics & Insights</a>
+                     </div>
+                 </div>
+     
+                 <!-- Dropdown: Products -->
+                 <div class="relative group">
+                     <button class="hover:text-emerald-500">Products</button>
+                     <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-52">
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Event Management Software</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">Mobile Event App</a>
+                         <a href="#" class="block px-4 py-2 hover:bg-emerald-100">CRM Integration</a>
+                     </div>
+                 </div>
+             </div>
+         </nav>
+
+        {% comment %} <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div> {% endcomment %}
+
+    <!-- Mobile Menu -->
+    {% comment %} <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-2 mt-2 bg-white shadow-lg p-4">
+        <a href="#" class="block hover:text-emerald-500">Resources</a>
+        <a href="#" class="block hover:text-emerald-500">Support</a>
+        <a href="#" class="block hover:text-emerald-500">Industries</a>
+        <a href="#" class="block hover:text-emerald-500">Solutions</a>
+        <a href="#" class="block hover:text-emerald-500">Products</a>
+    </div> {% endcomment %}
+        <div class="slider-container">
+            <div class="slider">
+                <img src="{% static 'image/mm.jpg' %}" alt="Image 1" class="active">
+                <img src="{% static 'image/m1.jpg' %}" alt="Image 2">
+                <img src="{% static 'image/premium_photo-1663011016084-c0413b8fecc2.avif' %}" alt="Image 3">
+                <img src="{% static 'image/premium_photo-1723773614061-03914c8d1334.avif' %}" alt="Image 4">
+            </div>
+        </div>
+
+
+        <div id="charity-donation" class=" rounded-md bg-gray-100 py-12" style="background-image:url('{% static 'image/composition-still-life-friendship-day-elements.jpg' %}')">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4">Our Commitment to Giving Back</h2>
+                        <p class="text-lg mb-6">
+                            At Lumevent, we believe in using our success to make a positive impact on the world.  We're proud to share that a percentage of our profits is dedicated to supporting charitable causes that align with our values.
+                        </p>
+        
+                        <div class="mb-6">
+                            <h3 class="text-2xl font-semibold mb-2">How We Contribute</h3>
+                            <p class="text-lg">
+                                We allocate [Percentage]% of our net profits to [Name of Charity or Cause Area, e.g., local community development projects, environmental conservation, etc.].  We carefully select organizations that demonstrate transparency, effectiveness, and a commitment to making a real difference.
+                                We partner with [Name of Charity] to support their vital work in [Cause Area].  A portion of every event we manage contributes directly to their mission.
+                            </p>
+                        </div>
+        
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">Our Ethical Principles</h3>
+                            <ul class="list-disc pl-6 text-lg">
+                                <li><strong>Transparency:</strong> We are open about our donation practices and the organizations we support.</li>
+                                <li><strong>Accountability:</strong> We track and measure the impact of our contributions to ensure they are being used effectively.</li>
+                                <li><strong>Integrity:</strong> We conduct our business with honesty and ethical practices in all our operations.</li>
+                                <li><strong>Community Focus:</strong> We prioritize supporting causes that benefit the communities where we live and work.</li>
+                            </ul>
+                        </div>
+        
+                    </div>
+        
+                    <div class="md:pl-8">  <h2 class="text-3xl font-bold mb-4">Lumevent: Illuminating Events, Empowering Communities</h2>
+                        <p class="text-lg mb-6">
+                            Lumevent is a leading event management company dedicated to creating unforgettable experiences.  We specialize in [mention your specializations, e.g., corporate events, weddings, conferences, etc.]. Our team of experienced professionals handles every detail, from concept to execution, ensuring seamless and successful events.
+                        </p>
+                        <p class="text-lg">
+                           But we're more than just event planners.  We believe in using our platform to make a positive social impact. Our commitment to ethical business practices and charitable giving is at the core of who we are.
+                        </p>
+        
+                        <img src="{% static './image/dsfghsert.jpg' %}" alt="Lumivent Team" class="hover:tilt hover:rounded-lg hover:shadow-lg mt-4 rounded-lg shadow-md">
+                        <img src="{% static './image/image.png' %}" alt="Lumivent Team" class="mt-4 rounded-lg shadow-md">
+        
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
+
+<script>
+    const textElement = document.querySelector('.typing-effect');
+    const text = "Bringing Your Moments to Light . . ."; // Your text here
+    let i = 0;
+    
+    function typeText() {
+      if (i < text.length) {
+        textElement.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeText, 50); // Adjust typing speed here (milliseconds)
+      }
+    }
+    
+    typeText(); // Start the typing effect
+
+    </script>
+    <script>
+        const slider = document.querySelector('.slider');
+        const images = document.querySelectorAll('.slider img');
+        let index = 0;
+
+        function slideImages() {
+            images.forEach(img => img.classList.remove('active')); // Remove active class from all
+            index = (index + 1) % images.length;
+            images[index].classList.add('active');
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        setInterval(slideImages, 3000); // Slide every 3 seconds
+    </script>
+    <!-- Footer Section -->
+<footer class="bg-teal-500 text-white py-10 mt-5">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center mb-10">
+            <div class="flex flex-col items-start">
+                {% comment %} <h1 class="text-3xl font-bold">
+                    <span class="font-extrabold">Lumevent</span>
+                </h1> {% endcomment %}
+                <div class="flex items-center pl-14">
+                    <img src="https://img.icons8.com/?size=100&id=SsrYhZUsKhjk&format=png&color=000000" alt="Icon" class="h-9 w-9" style="display: inline-block; vertical-align: middle;">
+                    <a href="/" class="text-2xl font-monoton text-white pl-1 drop-shadow-lg "> Lumevent</a>
+                </div>
+                <p class="mt-2 pl-8 hover:font-semibold">At Lumevent, we turn moments into unforgettable experiences with precision and passion. <br>Your vision, our commitment—delivering excellence beyond expectations!</p>
+                <div class="flex space-x-4 mt-4 pl-11">
+                    <a href="https://web.whatsapp.com/" class="hover:text-gray-300"><img src="https://img.icons8.com/?size=100&id=16713&format=png&color=000000" alt="WhatsApp" class="w-6 h-6"></a>
+                    <a href="https://www.linkedin.com/feed/" class="hover:text-gray-300"><img src="https://img.icons8.com/?size=100&id=xuvGCOXi8Wyg&format=png&color=000000" alt="LinkedIn" class="w-6 h-6"></a>
+                    <a href="https://www.xing.com/en" class="hover:text-gray-300"><img src="https://img.icons8.com/?size=100&id=13979&format=png&color=000000" alt="Xing" class="w-6 h-6"></a>
+                    <a href="https://www.facebook.com/" class="hover:text-gray-300"><img src="https://img.icons8.com/?size=100&id=uLWV5A9vXIPu&format=png&color=000000" alt="Facebook" class="w-6 h-6"></a>
+                </div>
+            </div>
+            <div class="mr-52">
+                <div class="mt-6 md:mt-0 pr-40">
+                    <h2 class="font-semibold text-white hover:underline hover:underline-offset-4">Company</h2>
+                    <ol class="mt-2 space-y-1 text-sm pl-3">
+                        <li><a href="#" class="hover:text-gray-300">About</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Blog</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Career</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Contact</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Privacy Policy</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+<nav class="flex ml-3 pl-15 border-t border-gray-500 pt-4">
+    <div class="mt-6 md:mt-0 pr-16">
+        <h2 class="font-semibold text-lg text-gray-800 hover:underline hover:underline-offset-4">🎉 Event Planning Services</h2>
+        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-gray-900">🔹Corporate Event Planning</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Wedding Planning & Coordination</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Concert & Festival Management</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Trade Shows & Exhibitions</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Product Launch Events</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Virtual & Hybrid Events</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Private Parties & Celebrations</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Gala Dinners & Award Ceremonies</a></li>
+        </ul>
+    </div>
+    
+    <div class="mt-6 md:mt-0 pr-16">
+        <h2 class="font-semibold text-lg text-gray-800 hover:underline hover:underline-offset-4">🎫 Ticketing & Registration</h2>
+        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-gray-900">🔹Online Ticket Sales & Booking</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹QR Code & RFID Ticketing</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹On-Site Event Registration</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹VIP & Early Bird Access Management</a></li>
+        </ul>
+    </div>
+    <div class="mt-6 md:mt-0 pr-16">
+        <h2 class="font-semibold text-lg text-gray-800 hover:underline hover:underline-offset-4">📣 Marketing & Promotion</h2>
+        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-gray-900">🔹Social Media Event Promotion</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Influencer & Brand Collaboration</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Email & SMS Marketing</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Event Branding & Custom Designs</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Press & Media Coverage</a></li>
+        </ul>
+    </div>
+    
+    <div class="mt-6 md:mt-0 pr-16">
+        <h2 class="font-semibold text-lg text-gray-800 hover:underline hover:underline-offset-4">📍 Venue & Logistics</h2>
+        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-gray-900">🔹Venue Selection & Booking</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Event Security & Crowd Management</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Catering & Hospitality</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Audio-Visual & Stage Setup</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Transport & Accommodation Arrangements</a></li>
+        </ul>
+    </div>
+    
+    <div class="mt-6 md:mt-0 pr-16">
+        <h2 class="font-semibold text-lg text-gray-800 hover:underline hover:underline-offset-4">🎬 Live Experiences & Entertainment</h2>
+        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-gray-900">🔹Live Performances & DJ Services</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Photography & Videography</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹AR/VR Interactive Experiences</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Fireworks & Special Effects</a></li>
+        </ul>
+    </div>
+    
+    <div class="mt-6 md:mt-0 pr-16">
+        <h2 class="font-semibold text-lg text-gray-800 hover:underline hover:underline-offset-4">📊 Analytics & Post-Event Reports</h2>
+        <ul class="mt-2 space-y-1 text-sm text-gray-600">
+            <li><a href="#" class="hover:text-gray-900">🔹Attendee Engagement Insights</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Event Performance & ROI Tracking</a></li>
+            <li><a href="#" class="hover:text-gray-900">🔹Post-Event Surveys & Feedback Analysis</a></li>
+        </ul>
+    </div>
+ </nav>
+    <div class="text-center mt-6 border-t border-gray-500 pt-4">
+        <p>Copyright © 2025 Lumevent</p>
+        <a href="#" class="text-gray-600 hover:text-gray-900">Privacy policy</a>
+    </div>
+</footer>
+   </body>
+</html> 
