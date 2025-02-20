@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils import timezone
-from .models import Participant, Event  
-from app1.forms import event_form
-
+from .models import Participant, Event, Category  
+from app1.forms import event_modelform
+from app1.models import Event, Participant, Category
+from .forms import event_modelform
 # # Create your views here.
 
 def dashboard(request):
@@ -69,9 +70,80 @@ def dashboard(request):
 #     return render(request, 'events/delete_event.html', {'event': event})
 
 
-def form1(request):
-    form=event_form()
-    context={'form':form}
-    return render(request,'Dashboard/OrganizerDashboard/Form1.html',context)
-    # return render(request, 'Dashboard/OrganizerDashboard/Form1.html')
+# def form1(request):
+#     events=Event.objects.all() #DB
+#     form=event_form(events=events) #for GET by defult 
+#     # form=event_form(Ct1={"event_type_or_catagory":"ceremonial_event", "event_id":1}) #for GET by defult 
+#     if request.method == "POST":
+#         form = event_form(request.POST, events=events)
+#         if form.is_valid():
+#             data=form.cleaned_data
+#             name=data.get('name')
+#             description=data.get('description')
+#             date=data.get('date')
+#             time=data.get('time')
+#             location=data.get('location')
+#             category=data.get('category')
+            
+#             event=Event.objects.create(name=name, description=description, date=date, time=time, location=location)
+#             event.objects.add()
+            
+            
+            
+#             # Assign catagoty to event
+#             for ct_id in category:
+#                 ct = Category.objects.get(id=ct_id)
+#                 event.category.add(ct)
+#             return HttpResponse("Event Added Successfully.")
+            
+#             # print(form.cleaned_data) 
+#     context={"form":form}
+#     return render(request,"Dashboard/OrganizerDashboard/Form1.html",context)
+#     # return render(request, 'Dashboard/OrganizerDashboard/Form1.html')
 
+def form1(request):
+    events = Event.objects.all()  # DB
+    form = event_modelform()  # for GET by default
+    if request.method == "POST":
+        form = event_modelform(request.POST)
+        if form.is_valid():
+            
+            ''' For Django Model Form DATA '''
+            form.save()
+            
+            ''' For Django Form DATA '''
+            # data=form.cleaned_data
+            # name=data.get('name')
+            # description=data.get('description')
+            # date=data.get('date')
+            # time=data.get('time')
+            # location=data.get('location')
+            # category=data.get('category')
+            
+            # event=Event.objects.create(name=name, description=description, date=date, time=time, location=location)
+            # event.objects.add()
+            
+            
+            
+            # # Assign catagoty to event
+            # for ct_id in category:
+            #     ct = Category.objects.get(id=ct_id)
+            #     event.category.add(ct)
+            return HttpResponse("Event Added Successfully.")
+            
+            # print(form.cleaned_data) 
+    context={"form":form}
+    return render(request,"Dashboard/OrganizerDashboard/Form1.html",context)
+    
+
+
+
+# def form1(request):
+#     form = event_form(initial={"event_type_or_category": "ceremonial_event", "event_id": 1})  # for GET by default
+#     if request.method == "POST":
+#         form = event_form(request.POST)
+#         if form.is_valid():
+#             # Process the form data
+#             pass
+#     context = {"form": form}
+#     return render(request, 'Dashboard/OrganizerDashboard/Form1.html', context)
