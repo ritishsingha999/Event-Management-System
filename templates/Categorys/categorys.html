@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Categorys</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .font-caveat {
+          font-family: 'Caveat', cursive;
+      }
+      .font-permanent {
+          font-family: 'Permanent Marker', cursive;
+      }
+      .font-monoton {
+          font-family: 'Monoton', cursive;
+      }
+      .bebas-neue-regular {
+          font-family: "Bebas Neue", serif;
+        }
+        .typing-effect {
+          border-right: 2px solid; /* Optional: Add a blinking cursor */
+          white-space: nowrap;
+          overflow: hidden;
+          animation: typing 3.5s steps(40, end) infinite, /* Typing animation */
+                     blink-caret .75s step-end infinite; /* Cursor animation */
+        }
+        .background {
+          background-image: url('{% static "./image/Screenshot 2025-02-15 232840.png" %}');
+          background-size: cover;
+          {% comment %} background-position: center; {% endcomment %}
+      }
+      .overlay {
+          opacity: 0.5;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+      }
+      .overlay1 {
+          opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-r from-purple-700 via-blue-600 to-pink-200">
+    <div class="text-black font-caveat text-4xl text-center font-extrabold">
+      Event Categorys
+    </div>
+    <div class="ml-10 mx-auto mt-5 font-caveat text-2xl">
+      {% comment %} {{events}} {% endcomment %}
+      <ol class="list-decimal divide-y-5 divide-black text-black">
+        {% for e in categorys %}
+        <li>
+          <b>Name:</b> {{e.name}} <br>
+          <b>Description:</b> {{e.description}} <br>  
+        </li>
+        <br />
+        {% endfor %}
+      </ol>
+    </div>
+
+    
+  </body>
+</html>

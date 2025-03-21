@@ -1,0 +1,186 @@
+{% comment %} {% include "Dashboard\OrganizerDashboard\Dashboard.html" %} {% endcomment %}
+{% comment %} {% block  %}{% endblock  %} {% endcomment %}
+{% comment %} {% extends "  .html" %} "Dashboard\OrganizerDashboard\Dashboard.html" {% endblock %}  {% endcomment %}
+{% comment %} {% extends "Dashboard\OrganizerDashboard\Dashboard.html" %} {% endcomment %}
+{% comment %} {% endblock %} {% endcomment %}
+{% comment %} {% block title %}Admin Panel{% endblock title %} {% endcomment %}
+{% comment %} {% block app1 %} {% endcomment %}
+{% comment %} 
+{% extends "Dashboard\OrganizerDashboard\Dashboard.html" %}
+{% block title %}Admin panel{% endblock title %}
+{% block events %} 
+{% endblock tasks %}
+{% endcomment %}
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- official Tailwind CSS CDN-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/6tPR5s5cl40sDbyl0KVYwxfqR8I5dLeq3kebw"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./D.css" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .font-caveat {
+          font-family: 'Caveat', cursive;
+      }
+      .font-permanent {
+          font-family: 'Permanent Marker', cursive;
+      }
+      .font-monoton {
+          font-family: 'Monoton', cursive;
+      }
+      .bebas-neue-regular {
+          font-family: "Bebas Neue", serif;
+        }
+        .typing-effect {
+          border-right: 2px solid; /* Optional: Add a blinking cursor */
+          white-space: nowrap;
+          overflow: hidden;
+          animation: typing 3.5s steps(40, end) infinite, /* Typing animation */
+          blink-caret .75s step-end infinite; /* Cursor animation */
+        }
+        .background {
+          background-image: url('{% static "./image/Screenshot 2025-02-15 232840.png" %}');
+          background-size: cover;
+          {% comment %} background-position: center; {% endcomment %}
+      }
+      .overlay {
+          opacity: 0.5;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+        }
+      .overlay1 {
+          opacity: 0.5;
+        }
+    </style>
+  </head>
+<body>
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4">Recent Events</h2>
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                class="px-6 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+              >
+                Event Name
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+              >
+                Date
+              </th>
+              <th
+                class="px-9 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+              >
+              Time  
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+              >
+                Location
+              </th>
+              <th
+                class="px-10 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+              >
+                Status
+              </th>
+            </tr>
+          </thead>
+          {% for event in events %}
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">{{event.name}}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{event.date}}</td>
+              <td class="px-6 py-4 whitespace-nowrap"> <span class=" px-2 py-2 font-semibold whitespace-nowrap bg-red-200 text-red-800 text-center rounded-full">{{event.time}}</span> </td>
+              <td class="px-6 py-4 whitespace-nowrap">{{event.location}}</td>
+              <td class="px-6 py-4 font-semibold whitespace-nowrap">
+                {% if event.status == "ongoing" %}
+                  <span class="px-3 py-2 bg-green-200 text-green-800 rounded-full">
+                    {{ event.status }}
+                  </span>
+                {% elif event.status == "completed" %}
+                  <span class="px-3 py-2 bg-blue-200 text-blue-800 rounded-full">
+                    {{ event.status }}
+                  </span>
+                {% elif event.status == "upcoming" %}
+                  <span class="px-3 py-2 bg-yellow-200 text-yellow-800 rounded-full">
+                    {{ event.status }}
+                  </span>
+                {% endif %}
+              </td>
+              {% comment %} <td class="px-6 py-4 whitespace-nowrap">Tech Meetup</td>
+              <td class="px-6 py-4 whitespace-nowrap">Nov 15, 2023</td>
+              <td class="px-6 py-4 whitespace-nowrap">London</td>
+              <td class="px-6 py-4 whitespace-nowrap">300</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span
+                  class="px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full"
+                  >Scheduled</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">Wedding Expo</td>
+              <td class="px-6 py-4 whitespace-nowrap">Dec 10, 2023</td>
+              <td class="px-6 py-4 whitespace-nowrap">Paris</td>
+              <td class="px-6 py-4 whitespace-nowrap">1200</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span
+                  class="px-2 py-1 bg-blue-200 text-blue-800 rounded-full"
+                  >In Progress</span
+                >
+              </td>
+            </tr> {% endcomment %}
+          </tbody>
+          {% endfor %}
+
+
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

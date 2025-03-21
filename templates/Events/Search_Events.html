@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .font-caveat {
+          font-family: 'Caveat', cursive;
+      }
+      .font-permanent {
+          font-family: 'Permanent Marker', cursive;
+      }
+      .font-monoton {
+          font-family: 'Monoton', cursive;
+      }
+      .bebas-neue-regular {
+          font-family: "Bebas Neue", serif;
+        }
+        .typing-effect {
+          border-right: 2px solid; /* Optional: Add a blinking cursor */
+          white-space: nowrap;
+          overflow: hidden;
+          animation: typing 3.5s steps(40, end) infinite, /* Typing animation */
+                     blink-caret .75s step-end infinite; /* Cursor animation */
+        }
+        .background {
+          background-image: url('{% static "./image/Screenshot 2025-02-15 232840.png" %}');
+          background-size: cover;
+          {% comment %} background-position: center; {% endcomment %}
+      }
+      .overlay {
+          opacity: 0.5;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+      }
+      .overlay1 {
+          opacity: 0.5;
+      }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="container mx-auto p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-semibold">Events</h1>
+            <button class="bg-teal-500 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded">
+                <i class="fas fa-plus mr-2"></i> Create Event
+            </button>
+        </div>
+
+        <div class="mb-6">
+            <input type="text" placeholder="Q Search events..." class="border rounded-lg p-2 w-full">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://via.placeholder.com/400x200" alt="Summer Music Festival" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold mb-2">Summer Music Festival</h2>
+                    <p class="text-gray-600 mb-2">
+                        <i class="far fa-calendar-alt mr-1"></i> July 15th, 2024
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Central Park
+                    </p>
+                    <p class="text-gray-600">
+                        <i class="fas fa-users mr-1"></i> 250/500 attendees
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://via.placeholder.com/400x200" alt="Tech Conference 2024" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h2 class="text-lg font-semibold mb-2">Tech Conference 2024</h2>
+                    <p class="text-gray-600 mb-2">
+                        <i class="far fa-calendar-alt mr-1"></i> August 20th, 2024
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Convention Center
+                    </p>
+                    <p class="text-gray-600">
+                        <i class="fas fa-users mr-1"></i> 180/300 attendees
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

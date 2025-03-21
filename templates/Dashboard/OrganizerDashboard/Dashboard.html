@@ -1,0 +1,788 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- official Tailwind CSS CDN-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/6tPR5s5cl40sDbyl0KVYwxfqR8I5dLeq3kebw"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./D.css" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+    rel="stylesheet"
+    />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat&display=swap"
+    rel="stylesheet"
+    />
+    <style>
+          
+/* ------------------------------------------------------------------------------------------------------------ */
+.loader {
+  width: 96px;
+  height: 48px;
+  display: inline-block;
+  position: relative;
+  background: #ffffff;
+    border-radius: 48px 48px 0 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 24px;
+    height: 12px;
+    border-radius: 24px 24px 0 0;
+    background: #60a5fa;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+
+.loader::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 32px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    background: #60a5fa;
+    transform-origin: 50% 100%;
+    box-sizing: border-box;
+    animation: animloader 2s linear infinite alternate;
+  }
+  
+  @keyframes animloader {
+    0% {
+      transform: rotate(-70deg);
+    }
+    
+    10% {
+      transform: rotate(-40deg);
+    }
+    
+    20%,
+    45%,
+    35% {
+      transform: rotate(-10deg);
+    }
+    
+    40%,
+    30% {
+      transform: rotate(-30deg);
+    }
+
+    50%,
+    60% {
+      transform: rotate(20deg);
+    }
+    
+    55%,
+    65%,
+    75% {
+        transform: rotate(40deg);
+      }
+      
+      70% {
+        transform: rotate(45deg);
+      }
+      
+      85%,
+      90% {
+        transform: rotate(50deg);
+      }
+      
+      95% {
+        transform: rotate(75deg);
+      }
+      
+    100%,
+    93% {
+      transform: rotate(70deg);
+    }
+  }
+  
+  /* ------------------------------------------------------------------------------------------------------------ */
+  .font-caveat {
+          font-family: 'Caveat', cursive;
+        }
+        .font-permanent {
+          font-family: 'Permanent Marker', cursive;
+        }
+        .font-monoton {
+          font-family: 'Monoton', cursive;
+        }
+        .bebas-neue-regular {
+          font-family: "Bebas Neue", serif;
+        }
+        .typing-effect {
+          border-right: 2px solid; /* Optional: Add a blinking cursor */
+          white-space: nowrap;
+          overflow: hidden;
+          animation: typing 3.5s steps(40, end) infinite, /* Typing animation */
+          blink-caret .75s step-end infinite; /* Cursor animation */
+        }
+        .background {
+          background-image: url('{% static "./image/Screenshot 2025-02-15 232840.png" %}');
+          background-size: cover;
+          {% comment %} background-position: center; {% endcomment %}
+      }
+      .overlay {
+          opacity: 0.5;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+        }
+      .overlay1 {
+          opacity: 0.5;
+        }
+    </style>
+  </head>
+  <body class="bg-gradient-to-r from-purple-300 via-blue-200 to-teal-200">
+    <div class="font-sans">
+      <div class="flex h-screen">
+        <aside
+          class="bg-teal-800 text-white w-55 p-4 rounded-br-full shadow-lg"
+        >
+        <h2 class="pl-3 text-2xl font-bold mb-7 text-teal-100 shadow-2xl">
+          Admin Panel
+        </h2>
+        <ul class="text-teal-50">
+          <li class="mb-2">
+            <a
+            href="{% url 'viewevents' %}"
+            class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+            ><i class="fas fa-calendar-alt mr-2"></i> Events</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+            href="{% url 'ALL_participants' %}"
+            class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+            ><i class="fas fa-users mr-2"></i> Attendees</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+            href="{% url 'event_categorys' %}"
+            class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+            ><i class="fas fa-map-marker-alt mr-2"></i> Venues</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+            href="{% url 'ds2' %}"
+            class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+            ><i class="fas fa-money-bill-wave mr-2"></i> Payments</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="{% url 'ds2' %}"
+              class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+              ><i class="fas fa-chart-line mr-2"></i> Analytics</a
+              >
+            </li>
+          <li class="mb-2">
+            <a
+              href="{% url 'ds2' %}"
+              class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+              ><i class="fas fa-chart-line mr-2"></i> Revenue</a
+              >
+          </li>
+          <li class="mb-2">
+            <a
+              href="{% url 'finance' %}"
+              class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+              ><i class="fas fa-chart-line mr-2"></i> finance </a
+              >
+          </li>
+          <li class="mb-2">
+            <a
+              href="{% url 'ds2' %}"
+              class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+              ><i class="fas fa-chart-line mr-2"></i> Theme</a
+              >
+            </li>
+            <li class="mb-2">
+              <a
+              href="{% url 'ds2' %}"
+              class="block hover:bg-teal-700 p-2 rounded-full hover:font-medium"
+              ><i class="fas fa-cog mr-2"></i> Settings</a
+              >
+            </li>
+          </ul>
+        </aside>     
+        
+        
+        <main class="flex-1 p-8">
+          <nav class="bg-white shadow-xl rounded-3xl mb-8 bg-gradient-to-r from-green-300 via-blue-200 to-pink-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex justify-between h-16">
+                <div class="flex">
+                  <div class="flex-shrink-0 flex  justify-between items-center content-around">
+                    <h2 class="text-2xl font-bold mb-6 text-teal-950 pt-6 pr-10">Dashboard</h2>
+                    <div class="-ml-5 loader"></div>
+                  </div>
+        
+                  <div class="hidden sm:ml-6 sm:flex space-x-4">
+                    <a
+                      href="{% url 'viewevents' %}"
+                      class="{% if request.resolver_match.url_name == 'event_list' %}border-indigo-500 text-gray-900{% else %}border-transparent text-gray-500{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium hover:text-gray-900 hover:underline hover:underline-offset-4"
+                    >
+                      Events
+                    </a>
+                    <a
+                      href="{% url 'event_categorys' %}"
+                      class="pl-1 {% if request.resolver_match.url_name == 'category_list' %}border-indigo-500 text-gray-900{% else %}border-transparent text-gray-500{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium hover:text-gray-900 hover:underline hover:underline-offset-4"
+                    >
+                      Categories
+                    </a>
+                    
+                    <a
+                      href="{% url 'ALL_participants' %}"
+                      class="pl-5 {% if request.resolver_match.url_name == 'participant_list' %}border-indigo-500 text-gray-900{% else %}border-transparent text-gray-500{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium hover:text-gray-900 hover:underline hover:underline-offset-4"
+                    >
+                      Participants
+                    </a>
+                  </div>
+                  
+</div>
+                
+                
+<div class="flex items-center ml-87 pl-25 gap-2 mb-2">
+                  
+<div class="">
+  <div id="tooltip-jese" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-0.5 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+      Jese Leos
+      <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <img data-tooltip-target="tooltip-jese" class="w-11 h-10 rounded-lg" src="{% static 'image/profile-picture-3.jpg' %}" alt="Medium avatar">
+</div>
+<div class="">
+  <div id="tooltip-roberta" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-0.5 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+      Roberta Casas
+      <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <img data-tooltip-target="tooltip-roberta" class="w-11 h-10 rounded-lg" src="{% static 'image/profile-picture-4.jpg' %}" alt="Medium avatar">
+</div>
+<div class="">
+  <div id="tooltip-bonnie" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-0.5 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+      Bonnie Green
+      <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+  <img data-tooltip-target="tooltip-bonnie" class="w-11 h-10 rounded-lg" src="{% static 'image/profile-picture-5.jpg' %}" alt="Medium avatar">
+</div>
+                </div>
+                
+                
+                <div class="hidden sm:ml-6 sm:flex items-center pb-2">
+                  <div class="ml-3 relative">
+                    {% if user.is_authenticated %}
+                    <div class="flex items-center space-x-4">
+                      <span class="text-sm text-gray-500">{{ user.username }}</span>
+                      <a href="" class="text-sm text-gray-500 hover:text-gray-900">
+                        Logout
+                      </a>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'form_2' %}" class=" text-black text-center font-bold rounded-lg bg-teal-300 hover:text-gray-100 border border-teal-500 border-x-4 shadow-md hover:shadow-lg px-2.5 py-2  hover:bg-teal-400 focus:ring-teal-200 ">
+                      Login
+                    </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </nav>
+
+  {% comment %} search option start {% endcomment %}
+  <form method="GET" action="{% url 'dashboard' %}" class="max-w-md mx-auto rounded-full pb-12">
+    <div class="relative">
+      <div
+        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+      >
+        <svg
+          class="w-4 h-4 text-teal-500 dark:text-teal-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 20 20"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+          />
+        </svg>
+      </div>
+      <input
+        type="search"
+        name="search"
+        id="default-search"
+        class="shadow-2xl block w-full p-4 ps-10 text-sm text-teal-600 border border-teal-300 rounded-full bg-teal-50 focus:ring-teal-500 focus:border-teal-500 dark:bg-white dark:border-teal-300 dark:placeholder-teal-700 dark:text-teal-800 dark:focus:ring-teal-500 dark:focus:border-teal-500"
+        value="{{ search_query }}"
+        placeholder="Search Events, Participants, Venues, etc ..."
+        required
+      />
+      <button
+        type="submit"
+        class="shadow-sm hover:shadow-2xl text-black absolute end-2.5 bottom-2.5 bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-teal-400 dark:hover:bg-teal-800 dark:hover:text-white dark:focus:ring-teal-800"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+  {% comment %} search option end {% endcomment %}
+
+
+              {% comment %} ------------------------------- {% endcomment %}
+  <div class=" max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-11 mt-5">
+      <div class="bg-white shadow-lg rounded-lg p-6">
+          <h2 class="text-xl font-bold text-gray-700 mb-4">🚀 Task Prioritization</h2>
+          <div class="space-y-3">
+              <div class="flex items-center justify-between bg-red-100 p-3 rounded-lg shadow border-l-4 border-red-500">
+                  <p class="text-gray-700 font-medium">Confirm Venue Booking</p>
+                  <span class="text-xs font-bold px-3 py-1 rounded bg-red-500 text-white">Urgent</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-yellow-100 p-3 rounded-lg shadow border-l-4 border-yellow-500">
+                  <p class="text-gray-700 font-medium">Send Invitations</p>
+                  <span class="text-xs font-bold px-3 py-1 rounded bg-yellow-500 text-white">High</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-blue-100 p-3 rounded-lg shadow border-l-4 border-blue-500">
+                  <p class="text-gray-700 font-medium">Hire Photographer</p>
+                  <span class="text-xs font-bold px-3 py-1 rounded bg-blue-500 text-white">Medium</span>
+              </div>
+          </div>
+      </div>
+      <div class="bg-white shadow-lg rounded-lg p-6">
+          <h2 class="text-xl font-bold text-gray-700 mb-4">📋 Task List</h2>
+          <div class="space-y-3">
+              <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg shadow">
+                  <p class="text-gray-700 font-medium">Set Up Stage</p>
+                  <span class="text-xs font-bold px-3 py-1 rounded bg-green-500 text-white">Completed</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg shadow">
+                  <p class="text-gray-700 font-medium">Check Catering</p>
+                  <span class="text-xs font-bold px-3 py-1 rounded bg-yellow-500 text-white">In Progress</span>
+              </div>
+
+              <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg shadow">
+                  <p class="text-gray-700 font-medium">Send Guest Reminders</p>
+                  <span class="text-xs font-bold px-3 py-1 rounded bg-red-500 text-white">Pending</span>
+              </div>
+          </div>
+      </div>
+      <div class="bg-white shadow-lg rounded-lg p-6">
+          <h2 class="text-xl font-bold text-gray-700 mb-4">📊 Event Metrics</h2>
+          <div class="space-y-3">
+              <div class="flex justify-between bg-blue-100 p-3 rounded-lg shadow">
+                  <p class="text-gray-700 font-medium">Total Registrations</p>
+                  <p class="font-bold">1,250</p>
+              </div>
+
+              <div class="flex justify-between bg-yellow-100 p-3 rounded-lg shadow">
+                  <p class="text-gray-700 font-medium">Engagement Rate</p>
+                  <p class="font-bold">78%</p>
+              </div>
+
+              <div class="flex justify-between bg-green-100 p-3 rounded-lg shadow">
+                  <p class="text-gray-700 font-medium">Revenue Generated</p>
+                  <p class="font-bold">$45,000</p>
+              </div>
+          </div>
+          <div class="mt-4">
+              <p class="text-gray-700 text-sm">Event Completion</p>
+              <div class="bg-gray-200 rounded-full h-4 mt-1">
+                  <div class="bg-blue-500 h-4 rounded-full w-3/5"></div>
+              </div>
+              <p class="text-sm text-gray-600 mt-1">60% Completed</p>
+          </div>
+      </div>
+  </div>
+{% comment %} ---------------------------------------- {% endcomment %}
+              
+             
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+          >
+          <a href="{% url "adminpanel" %}?type=all">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Total Events</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">{{total_events}}</p>
+                <div class="bg-green-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-green-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+
+
+
+
+            </div>
+          </a>
+
+          <a href="{% url 'adminpanel' %}?type=upcoming">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Upcoming Events</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">{{upcoming_events}}</p>
+                <div class="bg-cyan-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-cyan-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+              
+            </div>
+          </a>
+
+          <a href="{% url "adminpanel" %}?type=ongoing">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Ongoing Events</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">{{ongoing_events}}</p>
+                <div class="bg-blue-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-blue-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+            </div>
+          </a>
+          <a href="{% url "adminpanel" %}?type=completed">
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Completed Events</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">{{counts.completed}}</p>
+                <div class="bg-orange-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-orange-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+            </div>
+          </a>
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Total Attendees</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">{{total_participants}}</p>
+                <div class="bg-teal-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-teal-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Total Catagories</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">{{total_categories}}</p>
+                <div class="bg-red-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-red-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Total Revenue</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">$150,000</p>
+                <div class="bg-yellow-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-yellow-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h2 class="text-lg font-semibold mb-2">Total Cost</h2>
+              <div class="flex items-center justify-between">
+                <p class="text-3xl font-bold">$43,000</p>
+                <div class="bg-violet-100 p-3 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 text-violet-600"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  
+                </div> 
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-2xl font-semibold mb-4">Recent Events
+
+                <div class="flex items-center justify-between mb-4 mt-4">
+                  {% if messages %}
+                  <div class="mb-4">
+                      {% for message in messages %}
+                          <p class="bg-violet-100 rounded-lg text-violet-600 text-sm text-center">{{ message }}</p>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+                </div>
+
+              </h2>
+            <button class="flex items-center text-gray-600 hover:text-blue-600 transition duration-200 ease-in-out">
+                <span class="text-sm shadow-sm hover:shadow-2xl text-black bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-full px-4 py-2 dark:bg-teal-400 dark:hover:bg-teal-800 dark:hover:text-white dark:focus:ring-teal-800">
+                  <a href="{% url 'ds2' %}">More Details</a>
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+              <a href="{% url 'create_event' %}" style="text-decoration: none;">
+                <div style="
+                  width: 50px;
+                  height: 50px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #007bff;
+                  color: white;
+                  border-radius: 50%;
+                  cursor: pointer;
+                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                  position: relative;
+                " title="Add New Event">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </a>
+              
+            </div>
+            <div>
+
+             <div>
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+                    >
+                      Event Name
+                    </th>
+                    <th
+                      class="border border-emerald-500 border-x-3 border-y-4 px-12 py-3 text-left text-xs font-semibold text-teal-600 uppercase tracking-wider"
+                    >
+                    CRUD operation
+                      
+                    </th>
+                    <th
+                      class="px-8 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+                    >
+                      Date
+                    </th>
+                    <th
+                      class="px-9 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+                    >
+                    Time  
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+                    >
+                      Location
+                    </th>
+                    <th
+                      class="px-10 py-3 text-left text-xs font-bold text-teal-500 uppercase tracking-wider"
+                    >
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                
+  
+  
+                {% for event in all_events %}
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-5 py-4 whitespace-nowrap">{{event.name}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap"> 
+                      <div class="flex">
+                      {% comment %} <form action="{% url 'update_event' event.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="text-black mr-3 px-1 border border-green-600 border-x-2 py-1 rounded-lg font-mono text-center bg-green-400 hover:bg-green-500">Edit</button>
+                      </form>    {% endcomment %}
+                      <a href="{% url 'update_event' event.id %}" class="text-black mr-3 px-1 border border-green-600 border-x-2 py-1 rounded-lg font-mono text-center bg-green-400 hover:bg-green-500">Edit</a>
+                      
+                      
+                      {% comment %} <a href="{% url 'delete_event' event.id %}" class="text-black mr-3 px-1 border border-red-600 border-x-2 py-1 rounded-lg font-mono text-center bg-red-400 hover:bg-red-500">Delete</a> {% endcomment %}
+
+                         <form action="{% url 'delete_event' event.id %}" method="POST">
+                          {% csrf_token %}
+                          <button type="submit" class="text-black mr-3 px-1 border border-red-600 border-x-2 py-1 rounded-lg font-mono text-center bg-red-400 hover:bg-red-500">Delete</button></form>  
+
+                      </div>
+                    </td>
+                    <td class="px-8 py-4 whitespace-nowrap">{{event.date}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap"> <span class=" px-2 py-2 font-semibold whitespace-nowrap bg-red-200 text-red-800 text-center rounded-full">{{event.time}}</span> </td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{event.location}}</td>
+                    <td class="px-6 py-4 font-semibold whitespace-nowrap">
+                      {% if event.status == "ongoing" %}
+                        <span class="px-3 py-2 bg-green-200 text-green-800 rounded-full">
+                          {{ event.status }}
+                        </span>
+                      {% elif event.status == "completed" %}
+                        <span class="px-3 py-2 bg-blue-200 text-blue-800 rounded-full">
+                          {{ event.status }}
+                        </span>
+                      {% elif event.status == "upcoming" %}
+                        <span class="px-3 py-2 bg-yellow-200 text-yellow-800 rounded-full">
+                          {{ event.status }}
+                        </span>
+                      {% endif %}
+                    </td>
+                </tbody>
+                {% endfor %}
+              </table>
+             </div>
+            </div>
+          </div>
+        </main>
+        
+      </div>
+      
+    </div>
+    
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+

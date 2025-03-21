@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        .font-caveat {
+          font-family: 'Caveat', cursive;
+      }
+      .font-permanent {
+          font-family: 'Permanent Marker', cursive;
+      }
+      .font-monoton {
+          font-family: 'Monoton', cursive;
+      }
+      .bebas-neue-regular {
+          font-family: "Bebas Neue", serif;
+        }
+        .typing-effect {
+          border-right: 2px solid; /* Optional: Add a blinking cursor */
+          white-space: nowrap;
+          overflow: hidden;
+          animation: typing 3.5s steps(40, end) infinite, /* Typing animation */
+                     blink-caret .75s step-end infinite; /* Cursor animation */
+        }
+        .background {
+          background-image: url('{% static "./image/Screenshot 2025-02-15 232840.png" %}');
+          background-size: cover;
+          {% comment %} background-position: center; {% endcomment %}
+      }
+      .overlay {
+          opacity: 0.5;
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+      }
+      .overlay1 {
+          opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body class="bg-teal-50">
+    <div class="">
+      <div
+        class="text-center pt-12 text-5xl text-teal-400 hover:text-teal-500 hover:font-semibold font-caveat"
+      >
+        Financial Activity
+      </div>
+
+      <div>
+        <div class="text-gray-200 font-sans">
+          <div class="flex justify-center items-center min-h-screen p-4">
+            <div class="w-full max-w-4xl flex space-x-4">
+              <div class="w-3/4 space-y-1">
+                <div class="bg-teal-800 rounded-lg p-6 shadow-md">
+                  <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Current Balance</h2>
+                    <span class="bg-teal-700 rounded-md px-3 py-1 text-sm">
+                      Earning $0.00
+                      <span class="bg-green-600 ml-2">Airdrop $0.07</span>
+                    </span>
+                  </div>
+                  <p class="text-4xl font-bold mb-4">$19,995.269</p>
+                  <div class="flex space-x-2 mb-6">
+                    <button
+                      class="bg-yellow-500 text-gray-900 rounded-md px-4 py-2"
+                    >
+                      Add Fund
+                    </button>
+                    <button class="bg-teal-700 rounded-md px-4 py-2">
+                      Activation
+                    </button>
+                    <button class="bg-teal-700 rounded-md px-4 py-2">
+                      Transfer
+                    </button>
+                    <button class="bg-teal-700 rounded-md px-4 py-2">
+                      Withdraw
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="text-center">
+                      <h3 class="text-lg mb-2">$ Total Income</h3>
+                      <p class="text-2xl">$5.269</p>
+                      <div class="bg-teal-700 rounded-full h-2 mt-2">
+                        <div class="bg-yellow-500 rounded-full h-2 w-1/2"></div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <h3 class="text-lg mb-2">Review Income</h3>
+                      <p class="text-2xl">$0.269</p>
+                    </div>
+                    <div class="text-center">
+                      <h3 class="text-lg mb-2">Total Cost</h3>
+                      <p class="text-2xl">$312.00</p>
+                      <div class="bg-teal-700 rounded-full h-2 mt-2">
+                        <div class="bg-red-500 rounded-full h-2 w-3/4"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-1/4 bg-teal-800 rounded-lg p-6 shadow-md">
+                <h2 class="text-xl font-semibold mb-4">
+                  Last Day Review Earning
+                </h2>
+                <p class="text-3xl font-bold mb-4">$0.07</p>
+                <div class="mb-6">
+                  <p class="text-2xl">$0.269</p>
+                </div>
+                <button class="bg-teal-700 rounded-md px-4 py-2 w-full">
+                  Review
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

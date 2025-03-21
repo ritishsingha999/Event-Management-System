@@ -47,3 +47,20 @@ module.exports = {
   },
   plugins: [],
 }
+module.exports = {
+  darkMode: "class", // Enables dark mode using a class
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+module.exports = {
+  theme: {
+    extend: {
+      writingMode: {
+        'vertical-rl': 'vertical-rl',
+        'vertical-lr': 'vertical-lr',
+      }
+    }
+  }
+}
