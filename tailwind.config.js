@@ -13,23 +13,6 @@ module.exports = {
   plugins: [],
 }
 
-// module.exports = {
-//   theme: {
-//     extend: {
-//       animation: {
-//         'bg-slideshow': 'slideshow 12s infinite',
-//       },
-//       keyframes: {
-//         slideshow: {
-//           '0%': { backgroundImage: "url('/static/image/mm.jpg')" },
-//           '33%': { backgroundImage: "url('/static/image/premium_photo-1663011016084-c0413b8fecc2.avif')" },
-//           '66%': { backgroundImage: "url('/static/image/premium_photo-1723773614061-03914c8d1334.avif')" },
-//           '100%': { backgroundImage: "url('/static/image/m1.jpg')" },
-//         }
-//       }
-//     }
-//   }
-// }
 module.exports = {
   theme: {
     extend: {
