@@ -107,28 +107,28 @@ WSGI_APPLICATION = 'EMSproject.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://event_management_system_db_user:2xgydRqeNY5B45jEmScNUslkJKnCP5P8@dpg-cvetaq2n91rc73aq2dh0-a.oregon-postgres.render.com/event_management_system_db',
-#         conn_max_age=600
-#     )
-# }
-
-
-
-
-
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Event_Managment_DB',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',  # AWS RDS Endpoint
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://event_management_system_db_user:2xgydRqeNY5B45jEmScNUslkJKnCP5P8@dpg-cvetaq2n91rc73aq2dh0-a.oregon-postgres.render.com/event_management_system_db',
+        conn_max_age=600
+    )
 }
+
+
+
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Event_Managment_DB',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'HOST': 'localhost',  # AWS RDS Endpoint
+#         'PORT': '5432',
+#     }
+# }
 
 
 
